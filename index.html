@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@300&family=Tourney&display=swap" rel="stylesheet">
+
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        @media all {
+
+            body {
+                background-color: #000000;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+            }
+        
+        
+            h1 {
+                color:#7a37e6;
+                font-family:'Grenze Gotisch', cursive;
+                font-size: 50px;
+            }
+        
+            h2 {
+                color:#7a37e6;
+                font-family: 'Grenze Gotisch', cursive;
+                font-size: 30px;
+        
+            }
+        
+            .banner {
+                width:100%;
+                height: auto;
+            }
+        
+            footer {
+                background-color: #7a37e6;
+                    color: #000000;
+                    padding: 20px;
+                    margin-top: 10%;
+                    text-align: center;
+            }
+        
+        
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+        
+        
+            .music-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-gap: 20px;
+                color: #9f78dd;
+                padding-bottom: 3%;
+            }
+        
+            iframe {
+                width: 100%;
+                height: 200px;
+                border: 0;
+            }
+        
+            /* Estilos del slider de fotos */
+        
+            .slider-frame {
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame ul {
+                display: flex;
+                padding: 0;
+                width: 400%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+            
+            .mansion-container {
+                color: #9f78dd;
+            }
+        
+        
+            .historia-container {
+                color: #9f78dd;
+            }
+        
+            /* Estilos de las animaciones */
+            .animation-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+        
+            .animation-container img {
+                max-width: 100%;
+                height: auto;
+            }
+        
+        
+            .slider-frame2 {
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame2 ul {
+                display: flex;
+                padding: 0;
+                width: 700%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame2 li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame2 img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+                
+          
+              .top-nav {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                color: #7a37e6;
+                height: 50px;
+                padding: 1em;
+              }
+              
+              .menu {
+                display: flex;
+                flex-direction: row;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+              }
+              
+              .menu > li {
+                margin: 0 1rem;
+                overflow: hidden;
+              }
+              
+              .menu-button-container {
+                display: none;
+                height: 100%;
+                width: 30px;
+                cursor: pointer;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin-right: 10%;
+              }
+              
+              #menu-toggle {
+                display: none;
+              }
+              
+              .menu-button,
+              .menu-button::before,
+              .menu-button::after {
+                display: block;
+                background-color: #7a37e6;
+                position: absolute;
+                height: 4px;
+                width: 30px;
+                transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+                border-radius: 2px;
+              }
+              
+              .menu-button::before {
+                content: '';
+                margin-top: -8px;
+              }
+              
+              .menu-button::after {
+                content: '';
+                margin-top: 8px;
+              }
+              
+              #menu-toggle:checked + .menu-button-container .menu-button::before {
+                margin-top: 0px;
+                transform: rotate(405deg);
+              }
+              
+              #menu-toggle:checked + .menu-button-container .menu-button {
+                background: rgba(255, 255, 255, 0);
+              }
+              
+              #menu-toggle:checked + .menu-button-container .menu-button::after {
+                margin-top: 0px;
+                transform: rotate(-405deg);
+              }
+          
+          }
+          
+          
+          @media screen {
+          
+            body {
+                background-color: #000000;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+            }
+    
+    
+            h1 {
+                color:#7a37e6;
+                font-family:'Grenze Gotisch', cursive;
+                font-size: 50px;
+            }
+    
+            h2 {
+                color:#7a37e6;
+                font-family: 'Grenze Gotisch', cursive;
+                font-size: 30px;
+            }
+          
+            .banner {
+                width: 100%;
+                height: auto;
+            }
+        
+            footer {
+                background-color: #7a37e6;
+                    color: #000000;
+                    padding: 20px;
+                    margin-top: 10%;
+                    text-align: center;
+            }
+        
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+        
+            .music-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-gap: 20px;
+                color: #9f78dd;
+                padding-bottom: 3%;
+            }
+        
+            iframe {
+                width: 100%;
+                height: 200px;
+                border: 0;
+            }
+        
+            /* Estilos del slider de fotos */
+        
+            .slider-frame {
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame ul {
+                display: flex;
+                padding: 0;
+                width: 400%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+            
+            .mansion-container {
+                color: #9f78dd;
+            }
+        
+        
+            .historia-container {
+                color: #9f78dd;
+            }
+        
+            /* Estilos de las animaciones */
+            .animation-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+                overflow:hidden;
+            }
+        
+            .animation-container img {
+                max-width: 100%;
+                height: auto;
+            }
+        
+            .slider-frame2 {
+                width: 400px;
+                height: 400px;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame2 ul {
+                display: flex;
+                padding: 0;
+                width: 700%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame2 li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame2 img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+        
+        
+            .halfColumn {
+              width: 50%; 
+              box-sizing: border-box; 
+              display: flex;
+              flex-direction: column; 
+              justify-content: flex-start; 
+              padding: 0 15px 0 0;
+            
+            }
+          
+            /* cabecera */
+            .top-nav {
+              padding: 20px;
+              background: #000000; 
+              color: #7a37e6;;
+              border-bottom: 1px solid #7a37e6;;
+            }
+          
+           .top-nav div ul {
+              list-style: none;
+              margin: 0;
+              padding: 0;
+            }
+            .top-nav div li {
+              float: right;
+              margin-left: 10px;
+            }
+            .top-nav ul a, #pageContent .actionBtn {
+              margin-top: 7px;
+              color: #7a37e6;;
+              font-weight: 500;
+              font-family: 'Grenze Gotisch', cursive;
+              font-size: 25px;
+              text-decoration: none;
+              display: inline-block;
+              padding: 8px 16px;
+              border-radius: 12px;
+            }
+          
+            #pageContent .actionBtn {
+              background: #000;
+              color: #7a37e6;;
+              padding: 12px 20px;
+              font-size: 120%;
+            }
+          
+            .top-nav ul a:hover,.top-nav ul a:focus, #pageContent .actionBtn:hover, #pageContent .actionBtn:focus {
+              background: #fff;
+              color: #000;
+            
+            }
+          
+            #pageContent {
+              padding: 30px 0;
+              background: #7a37e6;;
+              color: #000;
+              overflow: auto;
+            
+            }
+       
+          
+          
+          @media screen and (max-width: 1190px) {
+          
+            .container {
+              width: auto; 
+              padding: 0 20px;
+            }
+          
+            }
+            #indice > div > a:nth-child(4), #indice > div > a:nth-child(7) {
+              margin-right: 0;
+            }
+          
+          }
+          
+          
+          @media screen and (max-width: 800px) {
+
+            #indice > div > a:nth-child(4), #indice > div > a:nth-child(7) {
+              margin-right: 2%;
+            }
+            .halfColumn {
+              float: none; width: 100%;
+            }
+              .menu-button-container {
+                display: flex;
+              }
+              .menu {
+                position: absolute;
+                top: 0;
+                margin-top: 50px;
+                left: 0;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+              }
+              #menu-toggle ~ .menu li {
+                height: 0;
+                margin: 0;
+                padding: 0;
+                border: 0;
+                transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+              }
+              #menu-toggle:checked ~ .menu li {
+                border: 1px solid #333;
+                height: 2.5em;
+                padding-bottom: 1em;
+                transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+              }
+              .menu > li {
+                display: flex;
+                justify-content: center;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                color: white;
+                background-color: #000;
+              }
+              .menu > li:not(:last-child) {
+                border-bottom: 1px solid #444;
+              }
+
+
+
+              body {
+                background-color: #000000;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, sans-serif;
+            }
+    
+    
+            h1 {
+                color:#7a37e6;
+                font-family:'Grenze Gotisch', cursive;
+                font-size: 50px;
+            }
+    
+            h2 {
+                color:#7a37e6;
+                font-size: 30px;
+                font-family: 'Grenze Gotisch', cursive;
+    
+            }
+            footer {
+                background-color: #7a37e6;
+                    color: #000000;
+                    padding: 20px;
+                    margin-top: 10%;
+                    text-align: center;
+            }
+        
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .music-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-gap: 20px;
+                color: #9f78dd;
+                padding-bottom: 3%;
+            }
+        
+            iframe {
+                width: 100%;
+                height: 200px;
+                border: 0;
+            }
+        
+            /* Estilos del slider de fotos */
+        
+            .slider-frame {
+                width: 100%;
+                height: auto;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame ul {
+                display: flex;
+                padding: 0;
+                width: 400%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+            
+            .mansion-container {
+                color: #9f78dd;
+            }
+        
+        
+            .historia-container {
+                color: #9f78dd;
+            }
+        
+            /* Estilos de las animaciones */
+            .animation-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+        
+            .animation-container img {
+                max-width: 100%;
+                height: auto;
+            }
+        
+            .slider-frame2 {
+                width: 100%;
+                height: auto;
+                margin: auto;
+                overflow: hidden;
+                color: #9f78dd;
+                padding-bottom: 3%;
+                padding-top: -3%;
+            }
+            
+            .slider-frame2 ul {
+                display: flex;
+                padding: 0;
+                width: 700%;
+                
+                animation: slide 20s infinite alternate ease-in-out;
+            }
+            
+            .slider-frame2 li {
+                width: 100%;
+                list-style: none;
+            }
+            
+            .slider-frame2 img {
+                width: 100%;
+            }
+            
+            @keyframes slide {
+                0% {margin-left: 0;}
+                20% {margin-left: 0;}
+                
+                25% {margin-left: -100%;}
+                45% {margin-left: -100%;}
+                
+                50% {margin-left: -200%;}
+                70% {margin-left: -200%;}
+                
+                75% {margin-left: -300%;}
+                100% {margin-left: -300%;}
+            }
+
+
+            }
+          
+          
+          
+          @media screen and (max-width: 500px) {
+          
+            #indice > div > a:nth-child(4), #indice > div > a:nth-child(7) {
+              margin-right: 0;
+            }
+          
+          }
+          
+          
+          
+          @media print {
+          
+            body {
+              font: 400 14pt/1.4 'Grenze Gotisch', cursive; color: #000;
+            }
+            h1 {
+              font: 400 20pt/1.4 'Grenze Gotisch', cursive;
+          
+            }
+            h2 {
+              font: 400 20pt/1.4 'Grenze Gotisch', cursive;
+            }
+          
+            footer {
+              font-size: 11pt; margin-top: 30pt;
+            }
+            #pageContent {
+              margin: 30pt 0;
+            }
+            a {
+              color: #000;
+            }
+          
+          }
+    </style>
+
+</head>
+<body>
+
+    <section class="top-nav">
+        <div>
+          <a href="antezana247.html"><img src="logo.png" width="100" height="100" alt=""></a>
+        </div>
+        <input id="menu-toggle" type="checkbox" />
+        <label class='menu-button-container' for="menu-toggle">
+        <div class='menu-button'></div>
+      </label>
+        <ul class="menu">
+           <li><a href="index.html">Inicio</a></li>
+            <li><a href="historia.html">Historia</a></li>
+            <li><a href="noticias.html">Noticias</a></li>
+            <li><a href="nosotros.html">Sobre nosotros</a></li>
+        </ul>
+      </section>
+
+      <img class="banner" src="antezana.jpeg"alt="Banner">
+      <center>
+      <h1><b>Antezana 247</b></h1>
+     </center>
+
+     <div class="container">
+        <section>
+            <h2>La Mansión</h2>
+            <div class = "mansion-container">
+            <p>Esta histórica residencia, <b>Antezana 247</b>, ubicada en un barrio emblemático de <b>Buenos Aires</b>, ha sido testigo de importantes momentos en la historia de la música urbana en el país. Fue en esta mansión donde se llevó a cabo la creación de <b>"Modo Diablo"</b>, lo que la convierte en un lugar de importancia artística y cultural.
+                Además, ha sido el escenario de numerosas reuniones y encuentros entre artistas, productores y colaboradores de renombre en la escena argentina. Ha servido como centro de inspiración y colaboración, fomentando la creatividad y el intercambio de ideas.
+                Por todo esto y más, considerarla como <b><u>Patrimonio Cultural</b> permitiría preservar su valor histórico y garantizar su protección para las generaciones futuras</u>. Sería un reconocimiento a la contribución de <b>"Modo Diablo"</b> y otros artistas que han pasado por sus puertas, así como a la importancia de la música urbana en la identidad cultural de Argentina.
+                La Mansión Antezana 247, representa un lugar de importancia histórica y cultural. Por lo tanto, considerarla como <u><b>Patrimonio Cultural sería un reconocimiento adecuado a su contribución y garantizaría su preservación para las futuras generaciones</b></u></p>
+            </div>
+                <div class="slider-frame2">
+                <ul>
+                    <li><img src="mansion1.jpeg" alt=""></li>
+                    <li><img src="mansion2.jpeg" alt=""></li>
+                    <li><img src="mansion3.jpeg" alt=""></li>
+                    <li><img src="mansion4.jpeg" alt=""></li>
+                    <li><img src="mansion5.jpeg" alt=""></li>
+                    <li><img src="mansion6.jpeg" alt=""></li>
+                    <li><img src="mansion7.jpeg" alt=""></li>
+                    
+                </ul>
+            </div>
+        </section>
+
+        <section>
+          <h2>Música</h2>
+          <div class="music-container">
+              <p>El álbum <b>"Antezana 247" de Ysy A</b> es una obra maestra musical que lleva el nombre de la icónica mansión Antezana 247 en Buenos Aires, Argentina. Este álbum representa un viaje introspectivo a través de las vivencias y experiencias del artista.
+                  Con letras profundas y melodías cautivadoras, Ysy A nos sumerge en su mundo personal y nos invita a explorar diferentes facetas de su vida.<b> Cada canción es una pieza del rompecabezas que revela su trayectoria, sus luchas, sus triunfos y sus reflexiones más íntimas.</b>
+                  Este álbum no solo es una obra de arte musical, sino también una ventana a la mente creativa y profunda de Ysy A. </p>
+              <iframe width="560" height="352" src="https://www.youtube.com/embed/videoseries?list=PLSel5e2j7Bz17l8vBgJuMG87DBjEWQqJd" title="Antezana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+              <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/5tPDpnIZLtftbejuG6BllH?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+              <p>Este álbum es un testimonio de la evolución artística y personal de Ysy A dentro de La Mansión y el crecimiento que tuvo desde la final del Quinto Escalón hasta el fin de su estancia en La Mansión. Es un viaje emocional que te lleva a través de altibajos, emociones y pensamientos profundos. Este álbum ha dejado una huella imborrable en la escena musical argentina, 
+                  consolidando a Ysy A como uno de los artistas más destacados de su generación.</p>
+          </div>
+      </section>
+
+
+        <section>
+            <h2>Más contenido en las demás páginas</h2>
+            <div class="animation-container">
+                <center>
+                <img src="gif2.gif" alt="Gif2">
+                <img src="gif1.gif" alt="Gif1">
+            </center>
+                <!-- Agrega más elementos con animaciones -->
+            </div>
+        </section>
+    </div>
+
+
+
+       <footer>
+        <p><b>Antezana 247 R.I.P La Mansión 2017 - ∞ </b></p>
+        <p><b>Diseñado por @anaxfnts apoyando a que La Mansión sea Patrimonio Cultural @antezana247_patrimoniocultural</b></p>
+    </footer>
+
+</body>
+</html>
